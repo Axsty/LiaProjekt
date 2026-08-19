@@ -1,0 +1,43 @@
+﻿using LiaProjekt.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace LiaProjekt.Services
+{
+    public class BookService
+    {
+        private readonly MyDbContext context;
+
+        public BookService(MyDbContext context)
+        {
+            this.context = context;
+        }
+        public async Task<IEnumerable<Book>> GetAllBooks()
+        {
+            return await context.Books.ToListAsync();
+        }
+
+        public async Task<Book> GetBookById(int id)
+        {
+            var book = await context.Books.FindAsync(id);
+
+            if (book == null)
+                throw new KeyNotFoundException($"Boken med id {id} hittades inte.");
+
+            return book;
+        }
+
+        public async Task<Book> DeleteBookById(int id)
+        {
+            var book = await context.Books.FindAsync(id);
+
+            if (book == null)
+                throw new KeyNotFoundException($"Boken med id {id} hittades inte.");
+
+            context.Books.Remove(book);
+            await context.SaveChangesAsync();
+
+            return book;
+        }
+    }
+}
