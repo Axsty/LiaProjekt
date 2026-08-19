@@ -1,4 +1,5 @@
-﻿using LiaProjekt.Services;
+﻿using LiaProjekt.Models;
+using LiaProjekt.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,13 @@ namespace LiaProjekt.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBook(Book book)
+        {
+            var addedBook = await bookService.AddBook(book);
+            return CreatedAtAction(nameof(GetBookById), new { id = addedBook.Id }, addedBook);
         }
     }
 }

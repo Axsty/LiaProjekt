@@ -39,5 +39,13 @@ namespace LiaProjekt.Services
 
             return book;
         }
+
+        public async Task<Book> AddBook(Book book)
+        {
+            await context.Books.AddAsync(book);
+            await context.SaveChangesAsync();
+
+            return book;
+        }
     }
 }
