@@ -57,5 +57,19 @@ namespace LiaProjekt.Controllers
             var addedBook = await bookService.AddBook(book);
             return CreatedAtAction(nameof(GetBookById), new { id = addedBook.Id }, addedBook);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBook(int id, Book updatedBook)
+        {
+            try
+            {
+                var book = await bookService.UpdateBook(id, updatedBook);
+                return Ok(book);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
     }
 }
