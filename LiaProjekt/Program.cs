@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("https://glittery-wisp-a39f48.netlify.app/")
+        policy.WithOrigins("https://glittery-wisp-a39f48.netlify.app")
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
