@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiaProjekt.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/books")]
     [ApiController]
     public class BookController : ControllerBase
     {
